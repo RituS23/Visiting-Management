@@ -77,7 +77,7 @@ table 50100 "Visitor"
             Caption = 'ID Proof No.';
             DataClassification = ToBeClassified;
         }
-        field(15; "ApprovedReject By"; Code[60])
+        field(15; "ApprovedReject By"; Code[70])
         {
             Caption = 'Approved Rejected By';
             DataClassification = ToBeClassified;
