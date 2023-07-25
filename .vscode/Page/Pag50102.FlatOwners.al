@@ -122,6 +122,24 @@ page 50102 "Flat Owner List"
                 end;
             }
         }
+        area(Reporting)
+        {
+            action("My Visitor Detail")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'My Visitor Detail';
+                Image = Report;
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                begin
+                    Employee.SetRange(Employee."User ID", UserId);
+                    Report.RunModal(Report::"My Visitors", true, true, Employee);
+                end;
+
+            }
+        }
     }
     trigger OnOpenPage()
     var
@@ -129,4 +147,6 @@ page 50102 "Flat Owner List"
         Rec.SetFilter("User ID", UserId);
     end;
 
+    var
+        Employee: Record Employee;
 }

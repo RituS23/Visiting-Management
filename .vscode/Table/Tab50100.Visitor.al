@@ -44,7 +44,7 @@ table 50100 "Visitor"
 
         {
             Caption = 'Time Out';
-            Editable = false;
+            //  Editable = false;
         }
         field(9; "Status"; Enum Satus)
         {
@@ -81,6 +81,11 @@ table 50100 "Visitor"
         {
             Caption = 'Approved Rejected By';
             DataClassification = ToBeClassified;
+
+        }
+        field(16; MatchID; Boolean)
+        {
+            Caption = 'Macth ID';
 
         }
     }
@@ -155,10 +160,14 @@ table 50100 "Visitor"
     var
         textConst1001: TextConst ENU = 'Thanks for visiting %1 ji!';
         textCons1002: TextConst ENU = 'Already Logout!';
+        VisitorLogout: Record visitor;
     begin
-        IF Rec."Time Out" = 0DT then begin
-            Rec.Validate("Time Out", CurrentDateTime);
-            Message(textConst1001, Rec."First Name");
+        VisitorLogout.Get("Entry No.");
+        IF VisitorLogout."Time Out" = 0DT then begin
+            VisitorLogout.Validate("Time Out", CurrentDateTime);
+            VisitorLogout.Validate(MatchID, Rec.MatchID);
+            VisitorLogout.Modify();
+            Message(textConst1001, VisitorLogout."First Name");
         end else
             Error(textCons1002);
     end;

@@ -22,8 +22,6 @@ page 50108 "Visitor Check Out"
                     ToolTip = 'Specifies the value of the Contact No. field.';
                     ShowMandatory = true;
                     trigger OnValidate()
-                    //var
-                    //  myInt: Integer;
                     begin
                         FatchData(visitorph);
                     end;
@@ -75,7 +73,11 @@ page 50108 "Visitor Check Out"
                 field("ID Proof No"; Rec."ID Proof No")
                 {
                     ShowMandatory = true;
-                    Editable = false;
+                }
+                field(MatchID; Rec.MatchID)
+                {
+                    ShowMandatory = true;
+                    Editable = true;
                 }
                 field(Status; Rec.Status)
                 {
@@ -90,7 +92,7 @@ page 50108 "Visitor Check Out"
     {
         area(Processing)
         {
-            action("Logout")
+            action("CheckOut")
             {
                 ApplicationArea = Comments;
                 Caption = 'Check Out';
@@ -99,7 +101,10 @@ page 50108 "Visitor Check Out"
                 PromotedCategory = Process;
                 trigger OnAction()
                 begin
-                    rec.Logout();
+                    rec.TestField(MatchID);
+                    Rec.Logout();
+                    rec.Validate(rec."Time Out", CurrentDateTime);
+
                 end;
 
             }
@@ -113,12 +118,10 @@ page 50108 "Visitor Check Out"
         recvisitor: Record Visitor;
     begin
         recvisitor.SetRange("Contact No.", VisitorPh);
-        recvisitor.SetRange("Time Out", 0DT);
-        IF recvisitor.FindSet() then begin
+        IF recvisitor.FindLast() then begin
             rec.TransferFields(recvisitor, true);
             rec.Insert();
-        end;
+        end
     end;
-
 
 }

@@ -73,19 +73,19 @@ page 50101 "Visitor Card"
     {
         area(Processing)
         {
-            action("Logout")
-            {
-                ApplicationArea = Comments;
-                Caption = 'Check Out';
-                Image = StepOut;
-                Promoted = true;
-                PromotedCategory = Process;
-                trigger OnAction()
-                begin
-                    rec.Logout();
-                end;
+            // action("Logout")
+            // {
+            //     ApplicationArea = Comments;
+            //     Caption = 'Check Out';
+            //     Image = StepOut;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     trigger OnAction()
+            //     begin
+            //         Logout();
+            //     end;
 
-            }
+            // }
 
 
             action("Send_Request")
@@ -118,3 +118,4 @@ page 50101 "Visitor Card"
         }
     }
 }
+

@@ -6,9 +6,12 @@ report 50101 "My Visitors"
     RDLCLayout = 'My Visitor.RDL';
     DefaultLayout = RDLC;
 
+
     dataset
     {
         dataitem(Employee; Employee)
+        // DataItemTableView = WHERE()= CONST(Posting));
+
         {
             column(No; "No.")
             {
@@ -20,11 +23,14 @@ report 50101 "My Visitors"
             column(LastName; "Last Name")
             {
             }
+
+
             dataitem(Visitor; Visitor)
             {
                 DataItemLink = "visiting address" = field("No.");
                 DataItemLinkReference = Employee;
-                DataItemTableView = SORTING("Time In");
+                DataItemTableView = SORTING("Time In");//where("No."=field("Visiting Address"));
+
                 column(checkIn; CheckIndate)
                 {
 
@@ -55,35 +61,22 @@ report 50101 "My Visitors"
                 column(IDProofType; "ID Proof Type")
                 {
                 }
+                column(CheckOut; checkOut)
+                {
+
+                }
                 trigger OnAfterGetRecord()
                 begin
                     CheckIndate := DT2Date("Time In");
-
+                    CheckOut := DT2Date("Time Out");
                 end;
-
             }
 
         }
-    }
-    requestpage
-    {
-        layout
-        {
-            area(content)
-            {
-                group(GroupName)
-                {
-                }
-            }
-        }
-        actions
-        {
-            area(processing)
-            {
-            }
-        }
+
     }
     var
         CheckIndate: Date;
+        CheckOut: date;
 
 }
