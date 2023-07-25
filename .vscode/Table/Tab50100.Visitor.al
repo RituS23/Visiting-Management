@@ -83,6 +83,7 @@ table 50100 "Visitor"
             DataClassification = ToBeClassified;
 
         }
+        field(16; test; text[20]) { }
     }
     keys
     {
