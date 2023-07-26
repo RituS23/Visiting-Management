@@ -17,7 +17,7 @@ page 50108 "Visitor Check Out"
             {
                 Caption = 'General';
 
-                field(VisitorPh; VisitorPh)
+                field("Visitor Contact"; VisitorPh)
                 {
                     ToolTip = 'Specifies the value of the Contact No. field.';
                     ShowMandatory = true;
